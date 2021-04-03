@@ -72,7 +72,7 @@ const ContactComponent = () => {
     }
 
     const errors = validate(firstname, lastname, telnum, email);
-
+    ////using controlled forms.
     return(
         <div className="container">
             <div className="row">
