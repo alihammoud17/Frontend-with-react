@@ -1,16 +1,36 @@
 import React from 'react';
 import { useState } from 'react';
-import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron } from 'reactstrap';
+import { Navbar, NavbarBrand, Nav, NavbarToggler, 
+    Collapse, NavItem, Jumbotron, Button, 
+    Modal, ModalHeader, ModalBody,
+    Form, FormGroup, Input, Label } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
 const HeaderComponent = (props) => {
 
+    var username = document.getElementById("username");
+    var password = document.getElementById("password");
+    var remember = document.getElementById("remember");
+
     const [isNavOpen, setIsNavOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const toggleNav = () => {
         setIsNavOpen(!isNavOpen);
     }
 
+    const toggleModal = () => {
+        setIsModalOpen(!isModalOpen);
+    }
+
+    const handleLogin = (event) => {
+        toggleModal();
+        alert("Username: " + username.value + " Password: " + password.value
+        + " Remember: " + remember.checked);
+        event.preventDefault();
+    }
+
+    //uncontrolled forms
     return (
         <React.Fragment>
             <Navbar dark expand="md"> {/*for Meduim to XL screens*/}
@@ -46,6 +66,14 @@ const HeaderComponent = (props) => {
                                 </NavLink>
                             </NavItem>
                         </Nav>
+                        <Nav className="ml-auto" navbar>
+                            <NavItem>
+                                <Button outline onClick={toggleModal}>
+                                    <span className="fa fa-sign-in fa-lg"/>
+                                    &nbsp;Login
+                                </Button>
+                            </NavItem>
+                        </Nav>
                     </Collapse> 
                 </div>
             </Navbar>
@@ -63,6 +91,35 @@ const HeaderComponent = (props) => {
                     </div>
                 </div>
             </Jumbotron>
+            <Modal isOpen={isModalOpen} toggle={toggleModal}>
+                <ModalHeader toggle={toggleModal}>
+                    Login
+                </ModalHeader>
+                <ModalBody>
+                    <Form onSubmit={handleLogin}>
+                        <FormGroup>
+                            <Label htmlFor="username">Username</Label>
+                            <Input type="text" id="username" name="username" 
+                                innerRef={(i) => username = i} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label htmlFor="password">Password</Label>
+                            <Input type="password" id="password" name="password" 
+                                innerRef={(i) => password = i}/>
+                        </FormGroup>
+                        <FormGroup ckeck>
+                            <Label check>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<Input type="checkbox" name="remember"
+                                    innerRef={(i) => remember = i}/>
+                                Remember me
+                            </Label>
+                        </FormGroup>
+                        <Button type="submit" value="submit" color="primary">
+                            Login
+                        </Button>
+                    </Form>
+                </ModalBody>
+            </Modal>
         </React.Fragment>
     )
 }
