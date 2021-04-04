@@ -1,7 +1,6 @@
 
 
 import MenuComponent  from './MenuComponent';
-import { useState } from 'react'
 import DishDetailComponent from './DishDetailComponent';
 import HeaderComponent from './HeaderComponent';
 import FooterComponent from './FooterComponent';
