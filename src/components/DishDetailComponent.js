@@ -3,6 +3,7 @@ import { Card, CardImg, CardBody, CardTitle, CardText, Breadcrumb, BreadcrumbIte
 // import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import CommentFormComponent from './CommentFormComponent';
 
 const RenderDish = ({dish}) => {
     if(dish == null) {
@@ -45,6 +46,7 @@ const RenderComments = ({comments}) => {
             <ul className="list-unstyled">
                 {cmts}
             </ul>
+            <CommentFormComponent />
         </div>
         
     )
