@@ -4,7 +4,7 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Button, Modal, ModalHeader, 
     ModalBody, Label, Col, Row } from 'reactstrap';
 
-const CommentFormComponent = () => {
+const CommentFormComponent = (props) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -14,8 +14,7 @@ const CommentFormComponent = () => {
 
     const handleComment = values => {
         toggleModal();
-        console.log("Current State: " + JSON.stringify(values));
-        alert("Current State: " + JSON.stringify(values));
+        props.addComment(props.dishId, values.rating, values.author, values.comment);
     }
 
     return (
